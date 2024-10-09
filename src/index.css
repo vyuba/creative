@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  color: white;
+  font-family: "Martian Mono", monospace;
+}
+
+/* Content to be scrolled */
+.content {
+  height: 500px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  overflow-y: scroll;
+}
+
+/* Hide the default scrollbar */
+.scroll-container .content {
+  scrollbar-width: none; /* For Firefox */
+}
+
+.scroll-container .content::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, Edge */
+}
+
+/* Custom scrollbar container */
+.custom-scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  /* background-color: #fff; */
+}
+
+/* Custom scrollbar thumb */
+.custom-thumb {
+  width: 70px;
+  height: 100%; /* Adjust thumb height */
+  background-color: black;
+  border: 1px dashed #f0f0f0;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  writing-mode: horizontal-tb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+}
+
+/* Simulated dragging of the custom scrollbar */
+.scroll-container:hover .custom-thumb {
+  background-color: #555;
+}
+
+.box {
+  --b: 3px;   /* thickness of the border */
+  --c: white;   /* color of the border */
+  --w: 10px;  /* width of border */
+  
+
+  border: var(--b) solid #0000; /* space for the border */
+  --_g: #0000 90deg,var(--c) 0;
+  --_p: var(--w) var(--w) border-box no-repeat;
+  background:
+    conic-gradient(from 90deg  at top    var(--b) left  var(--b),var(--_g)) 0    0    / var(--_p),
+    conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g)) 100% 0    / var(--_p),
+    conic-gradient(from 0deg   at bottom var(--b) left  var(--b),var(--_g)) 0    100% / var(--_p),
+    conic-gradient(from -90deg at bottom var(--b) right var(--b),var(--_g)) 100% 100% / var(--_p);
+  
+  /*Irrelevant code*/  
+  /* width:200px;
+  height:100px; */
+  box-sizing:border-box;
+  margin:5px;
+  display:inline-flex;
+  /* font-size:30px; */
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
