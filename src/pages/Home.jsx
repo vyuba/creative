@@ -18,7 +18,7 @@ function Home() {
     }
   };
   return (
-    <div  className=" h-[calc(100vh)] bg-blue-700 flex bg-cover items-center justify-center relative overflow-hidden" >
+    <div  className=" h-[calc(100dvh)] bg-blue-700 flex bg-cover items-center justify-center relative overflow-hidden" >
       {/* <img className="w-full h-full absolute inset-0" src="/public/download.jpeg" alt="" /> */}
       <video className="w-full h-full absolute inset-0 object-cover" autoPlay playsInline loop muted src="/lil uzi.mp4"></video>
       <div className="w-full h-full flex gap-0 absolute inset-0">
