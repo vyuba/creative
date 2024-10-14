@@ -18,10 +18,11 @@ function ProjectCard({ setCurrentProjectIndex }) {
 
   return (
     <motion.div 
-    animate={ project ? {height: 'auto'} : {height:'400px'}}
+    animate={ project ? {height: 'auto'} : {height:'300px'}}
     className="fixed bottom-0  border w-full bg-black ">
-      <div onClick={handleProjectOpen} className="cursor-pointer py-4 px-2 w-full uppercase text-base border-b flex justify-between">
+      <div onClick={handleProjectOpen} className="cursor-pointer py-4 px-2 w-full uppercase text-base border-b flex justify-between relative" >
         <span>work</span>
+        <div className="h-1 rounded-full w-10 bg-white absolute top-4 left-1/2 translate-x-[-60%] translate-y-[-50%]"></div>
         <span  className="flex gap-1">
           <span> {project ? 'Open' : 'Close'} </span>
         <motion.svg 
@@ -33,10 +34,10 @@ function ProjectCard({ setCurrentProjectIndex }) {
       animate={project ? {height: 0} : {height:'auto'}}
       className={`overflow-hidden`}>
         {Data[0].director.projects.map((projects, index) => (
-          <div onClick={() => handleProjectClick(index)} key={projects.title} className="py-4 px-2 w-full uppercase text-base border-b flex justify-between cursor-pointer">
+          <div onClick={() => handleProjectClick(index)} key={projects.title} className="py-4 px-2 w-full uppercase border-b flex justify-between cursor-pointer text-sm font-extralight">
             <motion.a
               href="#"
-              className="flex flex-col items-center justify-center overflow-hidden h-7"
+              className="flex flex-col items-center justify-center overflow-hidden h-6"
               style={{
                 perspective: '15px', // Enables the 3D effect
                 textDecoration: 'none', // Removes underline from the link

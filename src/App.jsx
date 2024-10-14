@@ -6,6 +6,7 @@ import Work from './pages/Work';
 import Loader from './components/Loader';
 import { useState, useEffect } from 'react';
 import Data from './components/Data.js'
+import About from './pages/About.jsx';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="/work" element={<Work project={currentProject} setCurrentProjectIndex={setCurrentProjectIndex} />} />
+            <Route path="/about" element={<About/>} />
           </Routes>
         </>
       )}

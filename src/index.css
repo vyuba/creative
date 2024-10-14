@@ -5,6 +5,7 @@
 :root{
   color: white;
   font-family: "Martian Mono", monospace;
+  background-color: black;
 }
 
 /* Content to be scrolled */
@@ -82,4 +83,58 @@
   justify-content:center;
   align-items:center;
   text-align:center;
+}
+
+.pixelBackground {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pixelBackground .column {
+  width: 5vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pixelBackground .column .block {
+  width: 100%;
+  height: 5vw;
+  background-color: #ff6a00;
+}
+
+.paragraph {
+  display: flex;
+  font-size: 60px;
+  line-height: 1;
+  padding: 40px;
+  max-width: 1280px;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.paragraph .word {
+  position: relative;
+  margin-right: 12px;
+  margin-top: 12px;
+}
+
+.paragraph .word .shadow {
+  position: absolute;
+  opacity: 20%;
+}
+
+/* For WebKit-based browsers (Chrome, Safari, etc.) */
+.content-hero {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.content-hero::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome, Safari, and WebKit browsers */
 }

@@ -59,7 +59,7 @@ const ScrambleText: React.FC<Props> = ({ children }) => {
       onMouseLeave={stopScramble}
       className="relative overflow-hidden"
     >
-      <div className="relative z-10 flex items-center gap-2">
+      <div className="relative z-10 flex items-center gap-2 cursor-pointer">
         <span>{text}</span>
       </div>
     </motion.div>

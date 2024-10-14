@@ -28,7 +28,7 @@ function Navbar() {
                 // filter: 'invert(1)',
                 color: 'white',
             }}
-        className={`uppercase pt-7  z-[100] ${ clicked ? 'pl-6 transition-all':'pl-0' } `}>gibson hazard</span>
+        className={`uppercase pt-7  z-[100] ${ clicked ? 'pl-6 transition-all':'pl-0' } `}> <Link to='/' >gibson hazard</Link> </span>
             <ul className="uppercase font-thin hidden md:flex items-center flex-row gap-3 pt-5">
                 <Link to='/'>
                     <li>home</li>
@@ -36,11 +36,13 @@ function Navbar() {
                 <Link to='/work'>
                     <li>works</li>
                 </Link>
-                <li>about</li>
+                <Link to='/about'>
+                    <li>about</li>
+                </Link>
             </ul>
             <motion.div
             initial={{ width: '80px', height: '80px'}}
-            animate={ clicked ? { width: 'calc(100vw - 50px)', height: '380px' } : { width: '80px', height: '80px' }}
+            animate={ clicked ? { width: 'calc(100vw - 32px)', height: '380px' } : { width: '80px', height: '80px' }}
              className="w-20 h-20  bg-white fixed right-4 z-50 overflow-hidden md:hidden">
                     <div
                     onClick={handleClick}
