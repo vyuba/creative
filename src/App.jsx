@@ -7,9 +7,11 @@ import Loader from './components/Loader';
 import { useState, useEffect } from 'react';
 import Data from './components/Data.js'
 import About from './pages/About.jsx';
+import PixelTransition from './components/PixelTransition.jsx';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Simulate loading for 2 seconds (or replace this with actual loading logic)
   useEffect(() => {
@@ -25,14 +27,15 @@ function App() {
     <Router>
       {/* Show loader when the app is loading */}
       {isLoading ? <Loader /> : (
-        <>
-          <Navbar />
+        <div className='relative'>
+          <Navbar isVisible={isVisible} setIsVisible={setIsVisible} />
           <Routes>
-            <Route index element={<Home />} />
+            <Route isVisible={isVisible} index element={<Home />} />
             <Route path="/work" element={<Work project={currentProject} setCurrentProjectIndex={setCurrentProjectIndex} />} />
             <Route path="/about" element={<About/>} />
           </Routes>
-        </>
+          <PixelTransition isVisible={isVisible} />
+        </div>
       )}
     </Router>
   );

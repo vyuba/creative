@@ -11,6 +11,22 @@ function Home() {
   //   setPosition({ x: event.clientX, y: event.clientY });
   // };
 
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX - 1000, y: e.clientY - 430 });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.addEventListener('mousemove', handleMouseMove);
+      // window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+
   const trackRef = useRef(null);
   const thumbRef = useRef(null);
   const contentRef = useRef(null);
@@ -174,22 +190,22 @@ function Home() {
   //   setIsVisible(!isVisible);
   // }, 1000);
 
-  const [isVisible, setIsVisible] = useState(false);
+  
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
-  const handleNextVideo = () => {
-    setCurrentVideoIndex(
-      (prevIndex) => (prevIndex < videos.length - 1 ? prevIndex + 1 : 0)
-      // setIsVisible(!isVisible),
-    );
-  };
+  // const handleNextVideo = () => {
+  //   setCurrentVideoIndex(
+  //     (prevIndex) => (prevIndex < videos.length - 1 ? prevIndex + 1 : 0)
+  //     // setIsVisible(!isVisible),
+  //   );
+  // };
 
-  const handlePreviousVideo = () => {
-    setCurrentVideoIndex(
-      (prevIndex) => (prevIndex > 0 ? prevIndex - 1 : videos.length - 1)
-      // setIsVisible(!isVisible)
-    );
-  };
+  // const handlePreviousVideo = () => {
+  //   setCurrentVideoIndex(
+  //     (prevIndex) => (prevIndex > 0 ? prevIndex - 1 : videos.length - 1)
+  //     // setIsVisible(!isVisible)
+  //   );
+  // };
 
   return (
     <div className=" h-[calc(100dvh)] bg-blue-700 flex bg-cover items-center justify-center relative overflow-hidden">
@@ -227,45 +243,61 @@ function Home() {
             src={videos[currentVideoIndex].url}
         ></video>
     </div>
+    <motion.div
+      style={{
+        mixBlendMode: 'difference',
+        color: 'white',
+      }}
+      className=" cursor-pointer box z-10 uppercase text-sm py-1 px-2 bg-white"
+      onClick={playSound}
+      animate={{
+        x: mousePos.x,
+        y: mousePos.y,
+      }}
+      transition={{
+        // type: 'linear',
+        stiffness: 100,
+        damping: 0,
+      }}
+    >
+      play sound
+    </motion.div>
     <div className="absolute w-full h-[250px] bg-gradient-to-t from-black to-transparent bottom-0"></div>
       {/* <div className="w-full h-full flex gap-0 absolute inset-0"> */}
         {/* <PixelTransition isVisible={isVisible} /> */}
       {/* </div> */}
-      <div className="absolute bottom-4 uppercase text-sm flex justify-between items-center w-full px-2 py-3">
-        <ScrambleText>lil uzi vert</ScrambleText>
-        <ScrambleText>kick start</ScrambleText>
-      </div>
-      <motion.div
-        className="absolute cursor-pointer box z-10 uppercase text-sm py-1 px-2 bg-white"
-        onClick={playSound}
-        >
-        play sound
-      </motion.div>
       {/* Audio element */}
       <audio ref={audioRef} src="/click sound.wav" />
       {/* <div className="relative w-full bg-black h-fit "> */}
-      <div className="w-full absolute bottom-14 px-2  py-1 overflow-hidden">
-        <motion.div ref={thumbRef} onMouseDown={handleMouseDown} onTouchStart={handleTouchStart} className=" bottom-1 bg-black box z-50 relative uppercase text-sm  transition-all ">
-          <span className="bg-black w-full py-1 px-2">scroll</span>
-        </motion.div>
-        <div ref={trackRef} onClick={handleClickTrack} className="items-center justify-center absolute top-3 flex gap-3 cursor-pointer w-screen ">
-          <div className="flex bg-transparent gap-9">
-            {[...Array(10000)].map((_, i) => (
-              <span key={i} className="inline-flex h-5 w-[2.5px] bg-zinc-700 rounded-full"></span>
-            ))}
+      <div className="w-full flex flex-col gap-5 absolute bottom-7 px-2  py-1 overflow-hidden">
+        <div className=" uppercase text-sm flex flex-col gap-3 w-full px-4 py-3">
+          <ScrambleText>lil uzi vert</ScrambleText>
+          <ScrambleText>kick start</ScrambleText>
+        </div>
+        <div className="relative">
+          <motion.div ref={thumbRef} onMouseDown={handleMouseDown} onTouchStart={handleTouchStart} className=" bg-black box z-50 relative uppercase text-sm  transition-all ">
+            <span className="bg-black w-full py-1 px-2">scroll</span>
+          </motion.div>
+          <div ref={trackRef} onClick={handleClickTrack} className="items-center justify-center absolute top-3 flex gap-3 cursor-pointer w-screen ">
+            <div className="flex bg-transparent gap-9">
+              {[...Array(10000)].map((_, i) => (
+                <span key={i} className="inline-flex h-5 w-[2.5px] bg-zinc-700 rounded-full"></span>
+              ))}
 
-          </div>
+            </div>
+
+        </div>
         </div>
       </div>
       {/* </div> */}
-      <div className="video-controls absolute top-32 flex gap-10 ">
+      {/* <div className="video-controls absolute top-32 flex gap-10 ">
         <button className="uppercase text-sm" onClick={handlePreviousVideo}>
           Previous
         </button>
         <button className="uppercase text-sm" onClick={handleNextVideo}>
           Next
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

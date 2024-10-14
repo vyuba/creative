@@ -2,7 +2,8 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Link, NavLink } from "react-router-dom"
 import ScrambleText from "./ScrambleText"
-function Navbar() {
+import { TransitionLink } from "./TransitionLink";
+function Navbar({ isVisible, setIsVisible}) {
 
     const navLinks = [
         { path: '/', label: 'home' },
@@ -21,7 +22,7 @@ function Navbar() {
 
   return (
     <div className="">
-        <nav className="w-full py-4 px-4 justify-between flex bg-transparent fixed top-0 z-50">
+        <nav className="w-full py-4 px-4 justify-between flex bg-transparent fixed top-0 z-[10000000]">
         <span 
             style={{
                 mixBlendMode: 'difference',
@@ -30,15 +31,9 @@ function Navbar() {
             }}
         className={`uppercase pt-7  z-[100] ${ clicked ? 'pl-6 transition-all':'pl-0' } `}> <Link to='/' >gibson hazard</Link> </span>
             <ul className="uppercase font-thin hidden md:flex items-center flex-row gap-3 pt-5">
-                <Link to='/'>
-                    <li>home</li>
-                </Link>
-                <Link to='/work'>
-                    <li>works</li>
-                </Link>
-                <Link to='/about'>
-                    <li>about</li>
-                </Link>
+                <TransitionLink setIsVisible={setIsVisible} isVisible={isVisible} href={'/'} >home</TransitionLink>
+                <TransitionLink setIsVisible={setIsVisible} isVisible={isVisible} href={'/work'} >works</TransitionLink>
+                <TransitionLink setIsVisible={setIsVisible} isVisible={isVisible} href={'/about'} >about</TransitionLink>
             </ul>
             <motion.div
             initial={{ width: '80px', height: '80px'}}
@@ -69,7 +64,13 @@ function Navbar() {
                             isActive ? 'text-red-700' : 'inactive-class'
                         }
                         >
-                        <li><ScrambleText>{link.label}</ScrambleText></li>
+                        <li>
+                                <TransitionLink setIsVisible={setIsVisible} isVisible={isVisible} href={link.path} >
+                            <ScrambleText>
+                                    {link.label}
+                            </ScrambleText>
+                                </TransitionLink>
+                                </li>
                         </NavLink>
                     ))}
                     </ul>
